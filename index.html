@@ -25,7 +25,19 @@
             <input id="pdf-upload" type="file" />
         </div>
 
-        <div class="output-container">
+
+        <div id="sliders" class="slider-container">
+            <label for="fontSizeSlider">Font Size:</label>
+            <input type="range" id="fontSizeSlider" min="12" max="36" value="18" step="1" oninput="updateStyles()">
+            <span id="fontSizeValue">18px</span>
+
+            <label for="lineHeightSlider">Line Spacing:</label>
+            <input type="range" id="lineHeightSlider" min="1.0" max="2.5" value="1.5" step="0.1" oninput="updateStyles()">
+            <span id="lineHeightValue">1.5</span>
+        </div>
+
+
+        <div id="output" class="output-container">
             <p id="outputText"></p>
         </div>
 

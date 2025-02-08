@@ -8,17 +8,40 @@ function applyBionicReading(inputText) {
         return word;
     }).join(" ");
     return bionicText;
-};
+}
 
 function textChanged() {
     let inputText = document.getElementById("userText").value;
-    document.getElementById("outputText").innerHTML = applyBionicReading(inputText);    
-};
+    document.getElementById("outputText").innerHTML = applyBionicReading(inputText);
+    
+    var sliders = document.getElementById('sliders');
+    sliders.style.display = 'flex';
 
+    var output = document.getElementById('output');
+    output.style.display = 'flex';
+}
+
+
+function updateStyles() {
+    let fontSize = document.getElementById("fontSizeSlider").value;
+    let lineHeight = document.getElementById("lineHeightSlider").value;
+
+    document.getElementById("outputText").style.fontSize = fontSize + "px";
+    document.getElementById("outputText").style.lineHeight = lineHeight;
+
+    document.getElementById("fontSizeValue").textContent = fontSize + "px";
+    document.getElementById("lineHeightValue").textContent = lineHeight;
+}
 
 
 
 document.getElementById('pdf-upload').addEventListener('change', function(event) {
+    var sliders = document.getElementById('sliders');
+    sliders.style.display = 'flex';
+
+    var output = document.getElementById('output');
+    output.style.display = 'flex';
+
     document.getElementById("outputText").innerHTML = "Loading document...";
     const file = event.target.files[0];
     const pdfTextContainer = document.getElementById('pdf-text');
@@ -28,42 +51,36 @@ document.getElementById('pdf-upload').addEventListener('change', function(event)
     reader.onload = function(e) {
         const arrayBuffer = e.target.result;
 
-        // Use PDF.js to load the PDF
         pdfjsLib.getDocument(arrayBuffer).promise.then(function(pdf) {
             let paragraphs = [];
             const numPages = pdf.numPages;
 
-            // Iterate through all pages to extract text and detect paragraphs
             let pagesProcessed = 0;
             for (let pageNum = 1; pageNum <= numPages; pageNum++) {
                 pdf.getPage(pageNum).then(function(page) {
                     page.getTextContent().then(function(text) {
                         let pageTextItems = text.items;
 
-                        // Function to group text items into paragraphs
                         let currentParagraph = [];
                         let lastY = null;
-                        let lineThreshold = 20; // Distance threshold between lines (in points)
+                        let lineThreshold = 25;
 
                         pageTextItems.forEach(function(item) {
                             if (lastY !== null && Math.abs(lastY - item.transform[5]) > lineThreshold) {
-                                // When the vertical gap between current item and last item is large, consider as a new paragraph
+                    
                                 paragraphs.push(currentParagraph.join(' '));
                                 currentParagraph = [];
                             }
                             currentParagraph.push(item.str);
-                            lastY = item.transform[5]; // The Y position is at transform[5]
+                            lastY = item.transform[5]; 
                         });
 
-                        // Add the last paragraph
                         if (currentParagraph.length > 0) {
                             paragraphs.push(currentParagraph.join(' '));
                         }
 
-                        // Once all pages are processed, display the paragraphs
                         pagesProcessed++;
                         if (pagesProcessed === numPages) {
-                            //pdfTextContainer.textContent = paragraphs.join('\n\n'); // Display paragraphs
                             textContent = paragraphs.join(' <br> ');
                             document.getElementById("outputText").innerHTML = applyBionicReading(textContent);
                         }
