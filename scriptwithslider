@@ -1,0 +1,56 @@
+document.getElementById('pdf-upload').addEventListener('change', function(event) {
+    document.getElementById("loading").classList.remove("hidden");
+
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+        const arrayBuffer = e.target.result;
+        pdfjsLib.getDocument(arrayBuffer).promise.then(function(pdf) {
+            let textContent = '';
+            let pagesProcessed = 0;
+
+            for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                pdf.getPage(pageNum).then(function(page) {
+                    page.getTextContent().then(function(text) {
+                        textContent += text.items.map(item => item.str).join(' ') + '\n\n';
+                        pagesProcessed++;
+
+                        if (pagesProcessed === pdf.numPages) {
+                            document.getElementById("outputText").innerHTML = applyBionicReading(textContent);
+                            document.getElementById("loading").classList.add("hidden");
+                        }
+                    });
+                });
+            }
+        }).catch(function(error) {
+            console.error('Error reading PDF:', error);
+            document.getElementById("loading").innerHTML = "Error processing PDF.";
+        });
+    };
+
+    reader.readAsArrayBuffer(file);
+});
+
+function applyBionicReading(inputText) {
+    return inputText.split(" ").map(word => {
+        let boldLength = Math.max(1, Math.ceil(word.length * 0.4));  
+        return `<b>${word.slice(0, boldLength)}</b>${word.slice(boldLength)}`;
+    }).join(" ");
+}
+
+function textChanged() {
+    let inputText = document.getElementById("userText").value;
+    document.getElementById("outputText").innerHTML = applyBionicReading(inputText);
+}
+
+function updateStyles() {
+    let fontSize = document.getElementById("fontSizeSlider").value;
+    let lineHeight = document.getElementById("lineHeightSlider").value;
+
+    document.getElementById("outputText").style.fontSize = fontSize + "px";
+    document.getElementById("outputText").style.lineHeight = lineHeight;
+
+    document.getElementById("fontSizeValue").textContent = fontSize + "px";
+    document.getElementById("lineHeightValue").textContent = lineHeight;
+}
