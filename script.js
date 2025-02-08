@@ -93,7 +93,6 @@ document.getElementById('pdf-upload').addEventListener('change', function(event)
         });
     };
 
-    // Read the PDF file as array buffer
     reader.readAsArrayBuffer(file);
 });
 
