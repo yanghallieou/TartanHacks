@@ -8,6 +8,6 @@ The reader can input text via a textbox or directly upload a PDF file. Then the 
 This project presents an easy-to-use webpage to increase reading experience. It is especially useful for students or researchers who need to read large amounts of text. 
 
 ## Table of content
-```index.html```: main html file for the project
-```style.css```: css styling
-```scripts.js```: functions to extract text from pdf, update font styles and apply focus reading on the text. 
+- ```index.html```: main html file for the project
+- ```style.css```: css styling
+- ```scripts.js```: functions to extract text from pdf, update font styles and apply focus reading on the text. 
