@@ -3,42 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bionic Reading Website</title>
+    <title>FocuxText</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Free Bionic Reading Tool</h1>
-
-
-    <button onclick="textMode()" class="button">Input Text</button><label for="pdf-upload" class="button">
-        PDF Upload
-    </label>
-<input id="pdf-upload" type="file"/>
-    
-    <!--
-    <input type="file" id="pdf-upload"/>
-
-    
-    <textarea id="userText" oninput="textChanged()" placeholder="Enter your text here..."></textarea>
-    
-    
-     <button onclick="applyBionicReading()">Apply Bionic Reading</button> -->
-
-    <div class="container" id="containers">
-        <div class="left">
-            <textarea id="userText" placeholder="Just enter the text here..."></textarea>
+    <div class="container">
+        <div class="header">
+            <h1>FocusText</h1>
         </div>
-        
-        <div class="right">
-            <p id="outputText" class="output"></p>
+
+        <div class="input-container">
+            <textarea id="userText" placeholder="Enter your text here..."></textarea>
         </div>
-    </div>
 
-    <p id="outputTextPdf" class="output"> </p>
+        <div class="button-container">
+            <button onclick="textChanged()">Apply Bionic Reading</button>
+            <label for="pdf-upload" class="upload-button">Upload PDF</label>
+            <input id="pdf-upload" type="file" />
+        </div>
 
-    <!-- Center the button in the middle of the page -->
-    <div class="center-button">
-        <button id="textButton" onclick="textChanged()" class="button">Apply Bionic Reading</button>
+        <div class="output-container">
+            <p id="outputText"></p>
+        </div>
+
     </div>
 
     <script src="script.js"></script>
