@@ -19,7 +19,7 @@ function textChanged() {
 };
 
 
-
+/* 
 function extractTextAndDetectParagraphs()  {
     document.getElementById("outputText").innerHTML = "Loading document...";
 
@@ -60,11 +60,37 @@ function extractTextAndDetectParagraphs()  {
     } else {
         alert('Please upload a valid PDF file.');
     }
-};
+};*/
+
+
+function textMode() {
+    // Get the elements by their IDs
+    var textBox = document.getElementById('userText');
+
+    // Toggle the 'hidden' class on each element to hide or show it
+    textBox.style.display = 'block';
+}
+
+function pdfMode() {
+    var textBox = document.getElementById('userText');
+    textBox.style.display = 'none';
+
+    var container = document.getElementById('containers');
+    container.style.display = 'none';
+
+    //var leftElement = document.getElementById('leftElement');
+    //leftElement.style.display = 'none'; 
+
+    //var leftContainer = document.getElementById('leftContainer');
+    //leftContainer.classList.add('hidden');
+}
 
 
 document.getElementById('pdf-upload').addEventListener('change', function(event) {
-    document.getElementById("outputText").innerHTML = "Loading document...";
+
+    pdfMode();
+
+    document.getElementById("outputText_pdf").innerHTML = "Loading document...";
     const file = event.target.files[0];
     const pdfTextContainer = document.getElementById('pdf-text');
     
@@ -94,7 +120,7 @@ document.getElementById('pdf-upload').addEventListener('change', function(event)
                         // Function to group text items into paragraphs
                         let currentParagraph = [];
                         let lastY = null;
-                        let lineThreshold = 2; // Distance threshold between lines (in points)
+                        let lineThreshold = 20; // Distance threshold between lines (in points)
 
                         pageTextItems.forEach(function(item) {
                             if (lastY !== null && Math.abs(lastY - item.transform[5]) > lineThreshold) {
@@ -116,7 +142,7 @@ document.getElementById('pdf-upload').addEventListener('change', function(event)
                         if (pagesProcessed === numPages) {
                             //pdfTextContainer.textContent = paragraphs.join('\n\n'); // Display paragraphs
                             textContent = paragraphs.join(' <br> ');
-                            document.getElementById("outputText").innerHTML = applyBionicReading(textContent);
+                            document.getElementById("outputText_pdf").innerHTML = applyBionicReading(textContent);
                         }
                     });
                 });
@@ -130,3 +156,32 @@ document.getElementById('pdf-upload').addEventListener('change', function(event)
     // Read the PDF file as array buffer
     reader.readAsArrayBuffer(file);
 });
+    //document.getElementById("outputText").innerHTML = bionicText;
+//}
+/*
+// Function to apply Bionic Reading effect to any text element
+function applyBionicReadingForOurTexts() {
+    // Apply Bionic Reading to the title as well as other static elements
+    const textElements = document.querySelectorAll('h1, p, button');
+    
+    textElements.forEach(element => {
+        let text = element.innerHTML;
+
+        // Apply Bionic Reading to each word
+        let modifiedText = text.split(' ').map(word => {
+            let boldedPart = word.slice(0, Math.ceil(word.length / 2));  // First part of the word
+            let remainingPart = word.slice(Math.ceil(word.length / 2)); // Remaining part of the word
+
+            return `<b>${boldedPart}</b>${remainingPart}`;
+        }).join(' ');
+
+        // Update the text with the Bionic Reading applied
+        element.innerHTML = modifiedText;
+    });
+}
+
+// Apply Bionic Reading to the text on page load
+window.onload = function() {
+    applyBionicReadingForOurTexts();  // Apply to title and other text elements
+}
+    */
