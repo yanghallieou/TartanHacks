@@ -3,6 +3,7 @@ body {
     text-align: center;
     margin: 50px;
     background-color: #c3fbdc;
+    line-height: 1.6;  
 }
 
 h1 {
@@ -10,7 +11,7 @@ h1 {
     font-size: 48px;
     font-weight: bold;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     letter-spacing: 2px;
     background: linear-gradient(45deg, #ff7e5f, #feb47b);
     -webkit-background-clip: text;
@@ -47,6 +48,7 @@ textarea {
     font-size: 16px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    line-height: 1.6;
 }
 
 
@@ -77,6 +79,7 @@ button {
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    line-height: 1.6; 
 }
 
 button:hover {
