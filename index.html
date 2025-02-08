@@ -10,9 +10,15 @@
     <h1>Free Bionic Reading Tool</h1>
 
 
-    <button onclick="textMode()">Input Text</button><input type="file" id="pdf-upload" />
-
+    <button onclick="textMode()" class="button">Input Text</button><label for="pdf-upload" class="button">
+        Custom Upload
+    </label>
+<input id="pdf-upload" type="file"/>
+    
     <!--
+    <input type="file" id="pdf-upload"/>
+
+    
     <textarea id="userText" oninput="textChanged()" placeholder="Enter your text here..."></textarea>
     
     
@@ -24,15 +30,15 @@
         </div>
         
         <div class="right">
-            <p id="outputText"></p>
+            <p id="outputText" class="output"></p>
         </div>
     </div>
 
-    <p id="outputText_pdf"> </p>
+    <p id="outputTextPdf" class="output"> </p>
 
     <!-- Center the button in the middle of the page -->
     <div class="center-button">
-        <button onclick="textChanged()">Apply Bionic Reading</button>
+        <button id="textButton" onclick="textChanged()" class="button">Apply Bionic Reading</button>
     </div>
 
     <script src="script.js"></script>

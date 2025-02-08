@@ -64,19 +64,31 @@ function extractTextAndDetectParagraphs()  {
 
 
 function textMode() {
-    // Get the elements by their IDs
-    var textBox = document.getElementById('userText');
+    var container = document.getElementById('containers');
+    container.style.display = 'flex';
 
-    // Toggle the 'hidden' class on each element to hide or show it
-    textBox.style.display = 'block';
+    var container = document.getElementById('textButton');
+    container.style.display = 'inline-block';
+
+    var container = document.getElementById('outputTextPdf');
+    container.style.display = 'none';
+
 }
 
 function pdfMode() {
-    var textBox = document.getElementById('userText');
-    textBox.style.display = 'none';
+
+    
 
     var container = document.getElementById('containers');
     container.style.display = 'none';
+
+    var container = document.getElementById('textButton');
+    container.style.display = 'none';
+
+    var container = document.getElementById('outputTextPdf');
+    container.style.display = 'block';
+    
+
 
     //var leftElement = document.getElementById('leftElement');
     //leftElement.style.display = 'none'; 
@@ -90,7 +102,7 @@ document.getElementById('pdf-upload').addEventListener('change', function(event)
 
     pdfMode();
 
-    document.getElementById("outputText_pdf").innerHTML = "Loading document...";
+    document.getElementById("outputTextPdf").innerHTML = "Loading document...";
     const file = event.target.files[0];
     const pdfTextContainer = document.getElementById('pdf-text');
     
@@ -142,7 +154,7 @@ document.getElementById('pdf-upload').addEventListener('change', function(event)
                         if (pagesProcessed === numPages) {
                             //pdfTextContainer.textContent = paragraphs.join('\n\n'); // Display paragraphs
                             textContent = paragraphs.join(' <br> ');
-                            document.getElementById("outputText_pdf").innerHTML = applyBionicReading(textContent);
+                            document.getElementById("outputTextPdf").innerHTML = applyBionicReading(textContent);
                         }
                     });
                 });
