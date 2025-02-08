@@ -6,9 +6,39 @@ body {
 }
 
 h1 {
-    color: #141605;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    font-family: 'Arial', sans-serif;
+    font-size: 48px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    background: linear-gradient(45deg, #ff7e5f, #feb47b);
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: titleAnimation 1.5s ease-out forwards;
 }
+
+.bionic-part {
+    font-weight: normal; /* Make non-bold parts have normal weight */
+}
+
+h1 b {
+    font-weight: bold; /* Ensure bold sections are emphasized */
+}
+
+@keyframes titleAnimation {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+
 
 textarea {
     width: 80%;
