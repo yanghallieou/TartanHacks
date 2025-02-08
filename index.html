@@ -9,10 +9,20 @@
 <body>
     <h1>Free Bionic Reading Tool</h1>
 
-    <textarea id="userText" placeholder="Just enter the text here..."></textarea>
-    <button onclick="applyBionicReading()">Apply Bionic Reading</button>
+    <div class="container">
+        <div class="left">
+            <textarea id="userText" placeholder="Just enter the text here..."></textarea>
+        </div>
+        
+        <div class="right">
+            <p id="outputText"></p>
+        </div>
+    </div>
 
-    <p id="outputText"></p>
+    <!-- Center the button in the middle of the page -->
+    <div class="center-button">
+        <button onclick="applyBionicReading()">Apply Bionic Reading</button>
+    </div>
 
     <script src="script.js"></script>
 </body>
