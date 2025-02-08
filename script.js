@@ -5,6 +5,9 @@ function applyBionicReading(inputText) {
         if (word.length > 2 && word != "<br>") {
             return `<b>${word.slice(0, Math.ceil(word.length / 2))}</b>${word.slice(Math.ceil(word.length / 2))}`;
         }
+        else if (word.length <= 2){
+            return `<b>${word}</b>`;
+        }
         return word;
     }).join(" ");
     return bionicText;
@@ -93,7 +96,5 @@ document.getElementById('pdf-upload').addEventListener('change', function(event)
         });
     };
 
-    // Read the PDF file as array buffer
     reader.readAsArrayBuffer(file);
 });
-
